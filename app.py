@@ -5,6 +5,8 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image as keras_image
 from werkzeug.utils import secure_filename
 from PIL import Image
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 app = Flask(__name__)
 
@@ -48,14 +50,11 @@ def upload():
         max_prob = np.max(result[0])
         class_ind = np.argmax(result[0])
         predicted_class = class_labels[class_ind]
-
+        return (f"Predicted class: {predicted_class} with probability {max_prob:.4f}")
         # Return the result in a safe way
-        response = {
-            "class": str(predicted_class),  # Ensure it's a string to avoid Unicode issues
-            "probability": round(float(max_prob), 4)
-        }
+       
 
-        return jsonify(response)
+        
 
     return jsonify({"message": "Send a POST request with an image."})
 
