@@ -51,7 +51,7 @@ def upload():
         class_ind = np.argmax(result[0])
         predicted_class = class_labels[class_ind]
         return (f"Predicted class: {predicted_class} with probability {max_prob:.4f}")
-        # Return the result in a safe way
+        
        
 
         
